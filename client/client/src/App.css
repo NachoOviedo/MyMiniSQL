@@ -1,0 +1,278 @@
+/* ===== Reset y base ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --font-mono: "JetBrains Mono", "Fira Mono", "Consolas", monospace;
+  --color-bg: #0f1117;
+  --color-surface: #1a1d27;
+  --color-surface2: #22263a;
+  --color-border: #2e3350;
+  --color-accent: #4f8ef7;
+  --color-accent-dim: #1e3a6e;
+  --color-text: #e4e7f0;
+  --color-text-muted: #7a829e;
+  --color-success: #3ecf8e;
+  --color-error: #f56565;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ===== Layout ===== */
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.app-header {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 1rem;
+}
+
+.app-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-accent);
+}
+
+.app-subtitle {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-top: 0.2rem;
+}
+
+/* ===== Editor ===== */
+.editor-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Barra de base de datos activa */
+.db-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  padding: 0.4rem 0.75rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+}
+
+.db-label {
+  color: var(--color-text-muted);
+}
+
+.db-name {
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+.db-none {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* Textarea SQL */
+.textarea-container {
+  position: relative;
+}
+
+.sql-textarea {
+  width: 100%;
+  min-height: 220px;
+  padding: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  line-height: 1.7;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.15s;
+  tab-size: 2;
+}
+
+.sql-textarea:focus {
+  border-color: var(--color-accent);
+}
+
+.sql-textarea::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-execute {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.2rem;
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.btn-execute:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.btn-execute:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-clear {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.btn-clear:hover:not(:disabled) {
+  color: var(--color-text);
+  border-color: var(--color-text-muted);
+}
+
+.exec-time {
+  margin-left: auto;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+/* Spinner */
+.spinner {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== Resultados ===== */
+.result-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  background: rgba(245, 101, 101, 0.1);
+  border: 1px solid rgba(245, 101, 101, 0.3);
+  border-radius: 6px;
+  color: var(--color-error);
+  font-size: 0.85rem;
+}
+
+.result-success {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  background: rgba(62, 207, 142, 0.08);
+  border: 1px solid rgba(62, 207, 142, 0.25);
+  border-radius: 6px;
+  color: var(--color-success);
+  font-size: 0.85rem;
+}
+
+.result-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+/* Tabla de resultados */
+.result-table-wrapper {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.result-meta {
+  padding: 0.4rem 0.75rem;
+  background: var(--color-surface2);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.83rem;
+  font-family: var(--font-mono);
+}
+
+.result-table th {
+  background: var(--color-surface2);
+  color: var(--color-accent);
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.result-table td {
+  padding: 0.45rem 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+.result-table tr:last-child td {
+  border-bottom: none;
+}
+
+.result-table tbody tr:hover {
+  background: var(--color-surface2);
+}
+
+.empty-row {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-style: italic;
+  padding: 1.5rem !important;
+}
