@@ -1,0 +1,14 @@
+//
+// Created by nacho on 6/2/2026.
+//
+
+#ifndef MYMINISQL_PROCESADORDECONSULTAS_H
+#define MYMINISQL_PROCESADORDECONSULTAS_H
+
+
+class ProcesadorDeConsultas
+{
+};
+
+
+#endif //MYMINISQL_PROCESADORDECONSULTAS_H
