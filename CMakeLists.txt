@@ -12,28 +12,36 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(httplib)
 
-add_library(common INTERFACE)
+add_library(common INTERFACE
+        server/indexes/BST.h)
 target_include_directories(common INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/common)
 
-add_library(storage STATIC Almacenamiento/DataManager.cpp)
+add_library(storage STATIC Almacenamiento/DataManager.cpp
+        server/indexes/BST.h)
 target_include_directories(storage PUBLIC Almacenamiento)
 target_link_libraries(storage PRIVATE common)
 
-add_library(catalog STATIC Catalogo/SistemaDeCalogo.cpp)
+add_library(catalog STATIC Catalogo/SistemaDeCalogo.cpp
+        server/indexes/BST.h)
 target_include_directories(catalog PUBLIC Catalogo)
 target_link_libraries(catalog PRIVATE storage common)
 
-add_library(indexes STATIC indexes/Btree.cpp)
+add_library(indexes STATIC indexes/Btree.cpp
+        server/indexes/BST.h)
 target_include_directories(indexes PUBLIC indexes)
 target_link_libraries(indexes PRIVATE common)
 
-add_library(query STATIC Consultas/ProcesadorDeConsultas.cpp)
+add_library(query STATIC Consultas/ProcesadorDeConsultas.cpp
+        server/indexes/BST.h)
 target_include_directories(query PUBLIC Consultas)
 target_link_libraries(query PRIVATE catalog storage indexes common)
 
-add_library(api STATIC api/WebApi.cpp)
+add_library(api STATIC api/WebApi.cpp
+        server/indexes/BST.h
+        server/indexes/BST.h)
 target_include_directories(api PUBLIC api)
 target_link_libraries(api PRIVATE query httplib::httplib common)
 
-add_executable(tinysqldb main.cpp)
+add_executable(tinysqldb main.cpp
+        server/indexes/BST.h)
 target_link_libraries(tinysqldb PRIVATE api query catalog storage indexes common)
