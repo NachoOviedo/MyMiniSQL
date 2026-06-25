@@ -15,7 +15,7 @@
 // Constructor
 // ============================================================
 
-ProcesadorDeConsultas::ProcesadorDeConsultas(SistemaDeCalogo& catalogo, DataManager& dataManager)
+ProcesadorDeConsultas::ProcesadorDeConsultas(SistemaDeCatalogo& catalogo, DataManager& dataManager)
     : catalogo(catalogo), dataManager(dataManager) {}
 
 // ============================================================

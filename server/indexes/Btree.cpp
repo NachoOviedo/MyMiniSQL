@@ -5,6 +5,8 @@
 #include "BTree.h"
 #include <algorithm>
 #include <stdexcept>
+#include <functional>
+#include <cstdint>
 
 // ============================================================
 // Constructor y Destructor

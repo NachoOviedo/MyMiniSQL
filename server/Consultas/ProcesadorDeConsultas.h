@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 #include "Types.h"
-#include "SistemaDeCalogo.h"
+#include "SistemaDeCatalogo.h"
 #include "DataManager.h"
 
 // ProcesadorDeConsultas es el cerebro del servidor.
@@ -26,7 +26,7 @@
 
 class ProcesadorDeConsultas {
 public:
-    ProcesadorDeConsultas(SistemaDeCalogo& catalogo, DataManager& dataManager);
+    ProcesadorDeConsultas(SistemaDeCatalogo& catalogo, DataManager& dataManager);
 
     // Punto de entrada principal.
     // sql        : sentencia SQL sin el punto y coma final (o con él, se ignora)
@@ -34,7 +34,7 @@ public:
     QueryResult ejecutar(const std::string& sql, const std::string& dbContexto);
 
 private:
-    SistemaDeCalogo& catalogo;
+    SistemaDeCatalogo& catalogo;
     DataManager&     dataManager;
 
     // ----------------------------------------------------------------

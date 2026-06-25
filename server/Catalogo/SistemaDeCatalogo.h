@@ -22,10 +22,10 @@
 // en memoria (maps), de modo que las consultas al catalogo no requieren acceso a disco.
 // Solo se accede al disco cuando se crea o elimina algo.
 
-class SistemaDeCalogo {
+class SistemaDeCatalogo {
 public:
     // catalogPath: ruta a la carpeta "data/system_catalog/"
-    explicit SistemaDeCalogo(const std::string& catalogPath);
+    explicit SistemaDeCatalogo(const std::string& catalogPath);
 
     // Carga en memoria todos los datos de los 4 archivos binarios.
     // Debe llamarse una sola vez al arrancar el servidor.

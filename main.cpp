@@ -13,7 +13,7 @@
 #include <filesystem>
 #include <csignal>
 
-#include "SistemaDeCalogo.h"
+#include "SistemaDeCatalogo.h"
 #include "DataManager.h"
 #include "ProcesadorDeConsultas.h"
 #include "WebApi.h"
@@ -75,7 +75,7 @@ int main(int argc, char* argv[]) {
     std::cout << "  Catálogo en  : " << fs::absolute(CATALOG_PATH) << "\n";
 
     // ---- 2. Sistema de Catálogo ----
-    SistemaDeCalogo catalogo(CATALOG_PATH);
+    SistemaDeCatalogo catalogo(CATALOG_PATH);
     try {
         catalogo.load();
         std::cout << "  Catálogo     : OK — "

@@ -2,7 +2,7 @@
 // Created by nacho on 6/2/2026.
 //
 
-#include "SistemaDeCalogo.h"
+#include "SistemaDeCatalogo.h"
 #include <filesystem>
 #include <fstream>
 #include <stdexcept>
@@ -15,11 +15,11 @@ namespace fs = std::filesystem;
 // Constructor y carga inicial
 // --------------------------------------------------------------------------
 
-SistemaDeCalogo::SistemaDeCalogo(const std::string& path) : catalogPath(path) {
+SistemaDeCatalogo::SistemaDeCatalogo(const std::string& path) : catalogPath(path) {
     fs::create_directories(path);
 }
 
-void SistemaDeCalogo::load() {
+void SistemaDeCatalogo::load() {
     // Limpiar el estado en memoria antes de cargar para evitar duplicados
     databases.clear();
     tables.clear();
@@ -88,28 +88,28 @@ void SistemaDeCalogo::load() {
 // Rutas a los archivos del catalogo
 // --------------------------------------------------------------------------
 
-std::string SistemaDeCalogo::tableKey(const std::string& dbName, const std::string& tableName) const {
+std::string SistemaDeCatalogo::tableKey(const std::string& dbName, const std::string& tableName) const {
     return dbName + "." + tableName;
 }
 
-std::string SistemaDeCalogo::dbsFilePath()     const { return catalogPath + "/SystemDatabases.bin"; }
-std::string SistemaDeCalogo::tablesFilePath()  const { return catalogPath + "/SystemTables.bin"; }
-std::string SistemaDeCalogo::columnsFilePath() const { return catalogPath + "/SystemColumns.bin"; }
-std::string SistemaDeCalogo::indexesFilePath() const { return catalogPath + "/SystemIndexes.bin"; }
+std::string SistemaDeCatalogo::dbsFilePath()     const { return catalogPath + "/SystemDatabases.bin"; }
+std::string SistemaDeCatalogo::tablesFilePath()  const { return catalogPath + "/SystemTables.bin"; }
+std::string SistemaDeCatalogo::columnsFilePath() const { return catalogPath + "/SystemColumns.bin"; }
+std::string SistemaDeCatalogo::indexesFilePath() const { return catalogPath + "/SystemIndexes.bin"; }
 
 // --------------------------------------------------------------------------
 // Operaciones sobre el disco (templates)
 // --------------------------------------------------------------------------
 
 template<typename T>
-void SistemaDeCalogo::appendRecord(const std::string& filePath, const T& record) const {
+void SistemaDeCatalogo::appendRecord(const std::string& filePath, const T& record) const {
     std::ofstream file(filePath, std::ios::binary | std::ios::app);
     if (!file) throw std::runtime_error("No se pudo abrir el archivo de catalogo: " + filePath);
     file.write(reinterpret_cast<const char*>(&record), sizeof(T));
 }
 
 template<typename T>
-std::vector<T> SistemaDeCalogo::readAllRecords(const std::string& filePath) const {
+std::vector<T> SistemaDeCatalogo::readAllRecords(const std::string& filePath) const {
     std::vector<T> result;
     std::ifstream file(filePath, std::ios::binary);
     if (!file) return result; // El archivo puede no existir la primera vez
@@ -122,7 +122,7 @@ std::vector<T> SistemaDeCalogo::readAllRecords(const std::string& filePath) cons
 }
 
 template<typename T, typename Predicate>
-bool SistemaDeCalogo::deactivateRecord(const std::string& filePath, Predicate pred) const {
+bool SistemaDeCatalogo::deactivateRecord(const std::string& filePath, Predicate pred) const {
     std::fstream file(filePath, std::ios::binary | std::ios::in | std::ios::out);
     if (!file) return false;
 
@@ -146,7 +146,7 @@ bool SistemaDeCalogo::deactivateRecord(const std::string& filePath, Predicate pr
 // Conversiones de tipo
 // --------------------------------------------------------------------------
 
-uint8_t SistemaDeCalogo::typeToUint(ColumnType t) {
+uint8_t SistemaDeCatalogo::typeToUint(ColumnType t) {
     switch (t) {
         case ColumnType::INTEGER:  return 0;
         case ColumnType::DOUBLE:   return 1;
@@ -156,7 +156,7 @@ uint8_t SistemaDeCalogo::typeToUint(ColumnType t) {
     }
 }
 
-ColumnType SistemaDeCalogo::uintToType(uint8_t v) {
+ColumnType SistemaDeCatalogo::uintToType(uint8_t v) {
     switch (v) {
         case 0: return ColumnType::INTEGER;
         case 1: return ColumnType::DOUBLE;
@@ -170,7 +170,7 @@ ColumnType SistemaDeCalogo::uintToType(uint8_t v) {
 // Bases de datos
 // --------------------------------------------------------------------------
 
-bool SistemaDeCalogo::createDatabase(const std::string& name) {
+bool SistemaDeCatalogo::createDatabase(const std::string& name) {
     if (databaseExists(name)) return false;
 
     // Escribir al disco
@@ -184,14 +184,14 @@ bool SistemaDeCalogo::createDatabase(const std::string& name) {
     return true;
 }
 
-bool SistemaDeCalogo::databaseExists(const std::string& name) const {
+bool SistemaDeCatalogo::databaseExists(const std::string& name) const {
     for (const auto& db : databases) {
         if (db == name) return true;
     }
     return false;
 }
 
-std::vector<std::string> SistemaDeCalogo::listDatabases() const {
+std::vector<std::string> SistemaDeCatalogo::listDatabases() const {
     return databases;
 }
 
@@ -199,7 +199,7 @@ std::vector<std::string> SistemaDeCalogo::listDatabases() const {
 // Tablas
 // --------------------------------------------------------------------------
 
-bool SistemaDeCalogo::createTable(const TableDefinition& tableDef) {
+bool SistemaDeCatalogo::createTable(const TableDefinition& tableDef) {
     std::string key = tableKey(tableDef.dbName, tableDef.tableName);
     if (tables.count(key)) return false;
 
@@ -230,11 +230,11 @@ bool SistemaDeCalogo::createTable(const TableDefinition& tableDef) {
     return true;
 }
 
-bool SistemaDeCalogo::tableExists(const std::string& dbName, const std::string& tableName) const {
+bool SistemaDeCatalogo::tableExists(const std::string& dbName, const std::string& tableName) const {
     return tables.count(tableKey(dbName, tableName)) > 0;
 }
 
-TableDefinition SistemaDeCalogo::getTableDef(const std::string& dbName, const std::string& tableName) const {
+TableDefinition SistemaDeCatalogo::getTableDef(const std::string& dbName, const std::string& tableName) const {
     std::string key = tableKey(dbName, tableName);
     if (!tables.count(key)) {
         throw std::runtime_error("La tabla no existe: " + key);
@@ -242,7 +242,7 @@ TableDefinition SistemaDeCalogo::getTableDef(const std::string& dbName, const st
     return tables.at(key);
 }
 
-bool SistemaDeCalogo::dropTable(const std::string& dbName, const std::string& tableName) {
+bool SistemaDeCatalogo::dropTable(const std::string& dbName, const std::string& tableName) {
     std::string key = tableKey(dbName, tableName);
     if (!tables.count(key)) return false;
 
@@ -274,7 +274,7 @@ bool SistemaDeCalogo::dropTable(const std::string& dbName, const std::string& ta
     return true;
 }
 
-std::vector<std::string> SistemaDeCalogo::listTables(const std::string& dbName) const {
+std::vector<std::string> SistemaDeCatalogo::listTables(const std::string& dbName) const {
     std::vector<std::string> result;
     for (const auto& [key, def] : tables) {
         if (def.dbName == dbName) result.push_back(def.tableName);
@@ -286,7 +286,7 @@ std::vector<std::string> SistemaDeCalogo::listTables(const std::string& dbName) 
 // Indices
 // --------------------------------------------------------------------------
 
-bool SistemaDeCalogo::addIndex(const IndexDefinition& idx) {
+bool SistemaDeCatalogo::addIndex(const IndexDefinition& idx) {
     if (indexExists(idx.tableName, idx.colName)) return false;
 
     IndexRecord rec = {};
@@ -302,25 +302,25 @@ bool SistemaDeCalogo::addIndex(const IndexDefinition& idx) {
     return true;
 }
 
-bool SistemaDeCalogo::indexExists(const std::string& tableName, const std::string& colName) const {
+bool SistemaDeCatalogo::indexExists(const std::string& tableName, const std::string& colName) const {
     for (const auto& idx : indexes) {
         if (idx.tableName == tableName && idx.colName == colName) return true;
     }
     return false;
 }
 
-IndexDefinition SistemaDeCalogo::getIndex(const std::string& tableName, const std::string& colName) const {
+IndexDefinition SistemaDeCatalogo::getIndex(const std::string& tableName, const std::string& colName) const {
     for (const auto& idx : indexes) {
         if (idx.tableName == tableName && idx.colName == colName) return idx;
     }
     throw std::runtime_error("Indice no encontrado para la columna: " + colName);
 }
 
-std::vector<IndexDefinition> SistemaDeCalogo::listIndexes() const {
+std::vector<IndexDefinition> SistemaDeCatalogo::listIndexes() const {
     return indexes;
 }
 
-bool SistemaDeCalogo::dropIndex(const std::string& indexName) {
+bool SistemaDeCatalogo::dropIndex(const std::string& indexName) {
     bool found = deactivateRecord<IndexRecord>(indexesFilePath(), [&](const IndexRecord& r) {
         return std::string(r.indexName) == indexName;
     });

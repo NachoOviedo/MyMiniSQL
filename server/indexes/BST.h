@@ -23,6 +23,7 @@
 #include <string>
 #include <vector>
 #include <functional>
+#include <cstdint>
 
 // Un resultado de búsqueda devuelve el offset en disco del registro
 struct BSTSearchResult {

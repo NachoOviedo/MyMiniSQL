@@ -22,6 +22,7 @@
 
 #include <string>
 #include <vector>
+#include <cstdint>
 
 // Resultado de una búsqueda en el BTree
 struct BTreeSearchResult {
@@ -34,6 +35,7 @@ struct BTreeEntry {
     std::string key;
     int64_t     offset;
 
+    BTreeEntry() : key(""), offset(0) {}
     BTreeEntry(const std::string& k, int64_t off) : key(k), offset(off) {}
 };
 
