@@ -1,0 +1,21 @@
+# ninja log v7
+2	134	8040978449130392	httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-mkdir	e59aff9a0d476781
+2	134	8040978449130392	C:/Users/otago/Documents/MyMiniSQL/cmake-build-debug/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-mkdir	e59aff9a0d476781
+135	4885	8040978496640680	httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-download	89dda2f986ab5f8c
+135	4885	8040978496640680	C:/Users/otago/Documents/MyMiniSQL/cmake-build-debug/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-download	89dda2f986ab5f8c
+4887	5059	8040978496736159	httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-update	ef55940f86f35940
+4887	5059	8040978496736159	C:/Users/otago/Documents/MyMiniSQL/cmake-build-debug/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-update	ef55940f86f35940
+5059	5209	8040978499886160	httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-patch	295b12529a051f61
+5059	5209	8040978499886160	C:/Users/otago/Documents/MyMiniSQL/cmake-build-debug/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-patch	295b12529a051f61
+5209	5361	8040978501392946	httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-configure	8818c9e08495243d
+5209	5361	8040978501392946	C:/Users/otago/Documents/MyMiniSQL/cmake-build-debug/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-configure	8818c9e08495243d
+5361	5505	8040978502838082	httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-build	93eeb1277a50d5ab
+5361	5505	8040978502838082	C:/Users/otago/Documents/MyMiniSQL/cmake-build-debug/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-build	93eeb1277a50d5ab
+5505	5653	8040978504314617	httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-install	26828bc70956a13d
+5505	5653	8040978504314617	C:/Users/otago/Documents/MyMiniSQL/cmake-build-debug/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-install	26828bc70956a13d
+5653	5810	8040978505888999	httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-test	d1604ad17aba5eb2
+5653	5810	8040978505888999	C:/Users/otago/Documents/MyMiniSQL/cmake-build-debug/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-test	d1604ad17aba5eb2
+5810	5996	8040978507747636	CMakeFiles/httplib-populate-complete	e171a43da8b0fc0
+5810	5996	8040978507747636	httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-done	e171a43da8b0fc0
+5810	5996	8040978507747636	C:/Users/otago/Documents/MyMiniSQL/cmake-build-debug/_deps/httplib-subbuild/CMakeFiles/httplib-populate-complete	e171a43da8b0fc0
+5810	5996	8040978507747636	C:/Users/otago/Documents/MyMiniSQL/cmake-build-debug/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-done	e171a43da8b0fc0
