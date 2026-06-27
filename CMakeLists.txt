@@ -83,7 +83,7 @@ endif()
 # Si mingw13 está en otra ruta en tu máquina, ajusta MINGW_BIN_DIR.
 # ------------------------------------------------------------------
 if(WIN32)
-    set(MINGW_BIN_DIR "C:/mingw13/mingw64/bin")
+    set(MINGW_BIN_DIR "C:/Program Files/JetBrains/CLion 2026.1.1/bin/mingw/bin")
     set(MINGW_RUNTIME_DLLS
             "${MINGW_BIN_DIR}/libstdc++-6.dll"
             "${MINGW_BIN_DIR}/libgcc_s_seh-1.dll"
